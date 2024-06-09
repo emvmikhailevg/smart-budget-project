@@ -15,6 +15,9 @@
     <description>smart-budget-project</description>
     <properties>
         <java.version>17</java.version>
+
+        <org.springframework.boot.version>3.3.0</org.springframework.boot.version>
+        <org.projectlombok.version>1.18.32</org.projectlombok.version>
     </properties>
     <dependencies>
         <dependency>
@@ -27,6 +30,26 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${org.springframework.boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${org.projectlombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${org.springframework.boot.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

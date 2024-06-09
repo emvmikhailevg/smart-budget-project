@@ -1,0 +1,9 @@
+@font-face {
+	font-family: 'Cygre-SemiBold';
+	src: url('fontsmibold.eot'); /* IE 9 Compatibility Mode */
+	src: url('fontsmibold.eot?#iefix') format('embedded-opentype'), /* IE < 9 */
+		url('fontsmibold.woff2') format('woff2'), /* Super Modern Browsers */
+		url('fontsmibold.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
+		url('fontsmibold.ttf') format('truetype'), /* Safari, Android, iOS */
+		url('fontsmibold.svg#cygre-semibold') format('svg'); /* Chrome < 4, Legacy iOS */
+}

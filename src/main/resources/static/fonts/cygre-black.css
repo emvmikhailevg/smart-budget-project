@@ -1,0 +1,9 @@
+@font-face {
+	font-family: 'Cygre-Black';
+	src: url('fontsack.eot'); /* IE 9 Compatibility Mode */
+	src: url('fontsack.eot?#iefix') format('embedded-opentype'), /* IE < 9 */
+		url('fontsack.woff2') format('woff2'), /* Super Modern Browsers */
+		url('fontsack.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
+		url('fontsack.ttf') format('truetype'), /* Safari, Android, iOS */
+		url('fontsack.svg#cygre-black') format('svg'); /* Chrome < 4, Legacy iOS */
+}

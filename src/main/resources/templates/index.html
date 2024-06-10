@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/css/reset.css" rel="stylesheet" th:href="@{/css/reset.css}">
-    <link href="../static/css/reset.css" rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
     <title>SmartMoney</title>
 </head>
 <body>
     <header>
-        <a href="main.html" class="logo"><svg width="50" height="66" viewBox="0 0 50 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <a href="index.html" class="logo"><svg width="50" height="66" viewBox="0 0 50 66" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="25" cy="36" r="25" fill="#BBDE50"/>
             <path d="M27.9038 39.92H21.3438V42.8H27.3038V46.28H21.3438V52H16.9438V46.28H13.4638V42.8H16.9438V39.88H13.4638V36H16.9438V24H28.3038C30.6504 24 32.5971 24.7733 34.1438 26.32C35.6904 27.84 36.4638 29.76 36.4638 32.08C36.4638 34.2667 35.6371 36.12 33.9838 37.64C32.3304 39.16 30.3038 39.92 27.9038 39.92ZM27.9038 28.32H21.3438V36H27.9038C29.0771 36 30.0638 35.6267 30.8638 34.88C31.6638 34.1333 32.0638 33.2 32.0638 32.08C32.0638 31.0133 31.6638 30.12 30.8638 29.4C30.0904 28.68 29.1038 28.32 27.9038 28.32Z" fill="#F0EBE5"/>
         </svg>
@@ -64,7 +64,7 @@
             </svg>
             <p class="registration__text">Начните вести свой бюджет<br> вместе с нами</p>
             <div class="registration__btn">
-                <p class="registration__btn-text">Регистрация</p>
+                <p class="registration__btn-text"><a th:href="@{/authenticate}">Регистрация</a></p>
                 <div class="arrow">
                     <div></div>
                 </div>
@@ -86,6 +86,6 @@
 
     </footer>
 
-    <script src="../static/js/script.js"></script>
+    <script src="../static/js/script.js" th:href="@{/js/script.js}"></script>
 </body>
 </html>

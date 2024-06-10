@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/reset.css" rel="stylesheet" th:href="@{/css/reset.css}">
+    <link href="../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <title>Авторизация</title>
+</head>
+<body>
+    <div class="auth login-form">
+        <h1 class="auth-page__bg-text">smartmoney</h1>
+        <form class="auth-page" method="post" role="form" th:action="@{/authenticate}">
+            <div class="auth-page__btns">
+                <button type="button" class="auth-page__login login-form__login__btn active-login-btn">Вход</button>
+                <button type="button" class="auth-page__registration login-form__reg__btn">Регистрация</button>
+            </div>
+
+            <p class="auth-page__text">Добро пожаловать на<br> платформу SMARTMONEY!</p>
+
+            <label for="username">
+                <input type="text"
+                       id="username"
+                       name="username"
+                       placeholder="Логин"
+                       class="input input-login">
+            </label>
+
+            <label for="password">
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Пароль"
+                       class="input input-password">
+            </label>
+
+            <div>
+                <input type="checkbox" class="custom-checkbox" id="checkbox" name="checkbox" value="yes">
+                <label for="checkbox" class="remember">Запомнить меня</label>
+            </div>
+
+            <button type="submit" class="main-login-btn">Войти</button>
+            <p class="no-acc">Нет аккаунта? <a href="#" class="no-acc__register">Регистрация</a></p>
+            <a th:href="@{/}">Вернуться</a>
+        </form>
+    </div>
+    <div class="auth reg-form hidden">
+        <h1 class="auth-page__bg-text reg-page__bg-text">smartmoney</h1>
+        <form class="auth-page" method="post" role="form" th:action="@{/authenticate/register}" th:object="${user}">
+            <div class="auth-page__btns">
+                <button type="button" class="auth-page__login reg-form__login-btn">Вход</button>
+                <button type="button" class="auth-page__registration reg-form__reg-btn active-login-btn">Регистрация</button>
+            </div>
+
+            <label for="reg-username">
+                <input id="reg-username"
+                       name="reg-username"
+                       type="text"
+                       placeholder="Логин"
+                       th:field="*{username}"
+                       class="input input-login">
+            </label>
+
+            <label for="email">
+                <input id="email"
+                       name="email"
+                       type="email"
+                       placeholder="Email"
+                       th:field="*{email}"
+                       class="input input-email">
+            </label>
+
+            <label for="reg-password">
+                <input id="reg-password"
+                       name="reg-password"
+                       type="password"
+                       placeholder="Пароль"
+                       th:field="*{password}"
+                       class="input input-password">
+            </label>
+
+            <label for="confirmPassword">
+                <input id="confirmPassword"
+                       name="confirmPassword"
+                       type="password"
+                       placeholder="Подтвердите пароль"
+                       th:field="*{confirmPassword}"
+                       class="input input-password">
+            </label>
+
+            <button type="submit" class="main-login-btn main-reg-btn">Регистрация</button>
+            <p class="no-acc">Есть аккаунт?<a href="#" class="no-acc__register no-acc-login">Войти</a></p>
+            <a th:href="@{/}">Вернуться</a>
+        </form>
+    </div>
+
+    <script src="../static/js/script.js" th:href="@{/js/script.js}"></script>
+
+</body>
+</html>

@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
-public class MainController {
+@RequestMapping("/main")
+public class PerformController {
 
     @GetMapping
-    public String index() {
-        return "index";
+    public String perform() {
+        return "perform";
     }
 
 }

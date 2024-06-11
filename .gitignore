@@ -32,7 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 /.mvn/
-/src/main/resources/application.properties
+/src/main/resources/application.yml
 /src/test/
 /mvnw.cmd
 /mvnw

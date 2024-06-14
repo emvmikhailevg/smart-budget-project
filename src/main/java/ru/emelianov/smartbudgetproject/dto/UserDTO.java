@@ -1,16 +1,15 @@
 package ru.emelianov.smartbudgetproject.dto;
 
-import lombok.*;
-
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserDTO {
-
-    private String username;
-    private String email;
-    private String password;
-    private String confirmPassword;
-
-}
+/**
+ * <p>DTO для передачи информации о пользователе</p>
+ *
+ * @param username        имя пользователя
+ * @param email           электронная почта пользователя
+ * @param password        пароль пользователя
+ * @param confirmPassword подтверждение пароля пользователя
+ */
+public record UserDTO(
+        String username,
+        String email,
+        String password,
+        String confirmPassword) { }

@@ -21,7 +21,8 @@ public class AuthenticationController {
 
     @GetMapping
     public String login(Model model) {
-        model.addAttribute("user", new UserDTO());
+        model.addAttribute("user", new UserDTO(
+                null, null, null, null));
         return "login";
     }
 
@@ -31,11 +32,11 @@ public class AuthenticationController {
             return "login";
         }
 
-        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
+        if (!userDTO.password().equals(userDTO.confirmPassword())) {
             return "login";
         }
 
-        userService.register(userDTO.getEmail(), userDTO.getUsername(), userDTO.getPassword());
+        userService.register(userDTO.email(), userDTO.username(), userDTO.password());
         return "redirect:/authenticate";
     }
 

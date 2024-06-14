@@ -8,6 +8,9 @@ import ru.emelianov.smartbudgetproject.database.model.User;
 import ru.emelianov.smartbudgetproject.database.repository.UserRepository;
 import ru.emelianov.smartbudgetproject.service.UserService;
 
+/**
+ * <p>Реализация сервиса для управления пользователями</p>
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {

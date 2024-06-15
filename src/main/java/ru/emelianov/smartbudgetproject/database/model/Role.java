@@ -8,4 +8,5 @@ public enum Role {
      * Роль пользователя
      */
     USER
+
 }

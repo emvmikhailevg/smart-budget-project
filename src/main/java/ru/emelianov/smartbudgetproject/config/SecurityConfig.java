@@ -92,7 +92,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize
                                 .requestMatchers("/", "/authenticate/**").permitAll()
-                                .requestMatchers("/main/**").authenticated()
+                                .requestMatchers("/main/**", "/bank-account/**").authenticated()
                 )
                 .formLogin(
                         form -> form

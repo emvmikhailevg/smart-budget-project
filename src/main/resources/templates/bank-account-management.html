@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Bank Account Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <script>
+    function showForm(formId) {
+      document.getElementById('addAccountForm').style.display = 'none';
+      document.getElementById('transferForm').style.display = 'none';
+      document.getElementById('editAccountForm').style.display = 'none';
+      document.getElementById(formId).style.display = 'block';
+    }
+
+    function editAccount(button) {
+      const accountId = button.getAttribute('data-account-id');
+      const name = button.getAttribute('data-account-name');
+      const amount = button.getAttribute('data-account-amount');
+      const color = button.getAttribute('data-account-color');
+
+      document.getElementById('accountIdEdit').value = accountId;
+      document.getElementById('nameEdit').value = name;
+      document.getElementById('amountEdit').value = amount;
+      document.getElementById('colorEdit').value = color;
+      showForm('editAccountForm');
+    }
+  </script>
+</head>
+<body>
+<div class="container mt-5">
+  <h1>Bank Account Management</h1>
+  <div class="mb-3">
+    <button class="btn btn-primary" onclick="showForm('addAccountForm')">Create Account</button>
+    <button class="btn btn-secondary" onclick="showForm('transferForm')">Transfer Between Accounts</button>
+  </div>
+
+  <div id="addAccountForm" style="display:none;">
+    <h2>Add Bank Account</h2>
+    <form th:action="@{/bank-account/add}" method="post">
+      <div class="mb-3">
+        <label for="nameAdd" class="form-label">Account Name</label>
+        <input type="text" class="form-control" id="nameAdd" name="nameAdd" required>
+      </div>
+      <div class="mb-3">
+        <label for="amountAdd" class="form-label">Amount</label>
+        <input type="number" step="0.01" class="form-control" id="amountAdd" name="amountAdd" required>
+      </div>
+      <div class="mb-3">
+        <label for="colorAdd" class="form-label">Color (Hex)</label>
+        <input type="text" class="form-control" id="colorAdd" name="colorAdd" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Account</button>
+    </form>
+  </div>
+
+  <div id="transferForm" style="display:none;">
+    <h2>Transfer Amount</h2>
+    <form th:action="@{/bank-account/transfer}" method="post">
+      <div class="mb-3">
+        <label for="fromAccountIdTransfer" class="form-label">From Account</label>
+        <select class="form-control" id="fromAccountIdTransfer" name="fromAccountIdTransfer" required>
+          <option th:each="account : ${accounts}" th:value="${account.id}" th:text="${account.name}">Account</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="toAccountIdTransfer" class="form-label">To Account</label>
+        <select class="form-control" id="toAccountIdTransfer" name="toAccountIdTransfer" required>
+          <option th:each="account : ${accounts}" th:value="${account.id}" th:text="${account.name}">Account</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="amountTransfer" class="form-label">Amount</label>
+        <input type="number" step="0.01" class="form-control" id="amountTransfer" name="amountTransfer" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Transfer Amount</button>
+    </form>
+  </div>
+
+  <div id="editAccountForm" style="display:none;">
+    <h2>Edit Bank Account</h2>
+    <form th:action="@{/bank-account/edit}" method="post">
+      <input type="hidden" id="accountIdEdit" name="accountIdEdit">
+      <div class="mb-3">
+        <label for="nameEdit" class="form-label">Account Name</label>
+        <input type="text" class="form-control" id="nameEdit" name="nameEdit" required>
+      </div>
+      <div class="mb-3">
+        <label for="amountEdit" class="form-label">Amount</label>
+        <input type="number" step="0.01" class="form-control" id="amountEdit" name="amountEdit" required>
+      </div>
+      <div class="mb-3">
+        <label for="colorEdit" class="form-label">Color (Hex)</label>
+        <input type="text" class="form-control" id="colorEdit" name="colorEdit" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Edit Account</button>
+    </form>
+  </div>
+
+  <div th:if="${accounts != null}">
+    <h2>Your Accounts</h2>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Color</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="account : ${accounts}">
+        <td th:text="${account.name}">Account Name</td>
+        <td th:text="${account.amount}">Account Amount</td>
+        <td th:text="${account.color}">Account Color</td>
+        <td>
+          <button class="btn btn-warning"
+                  data-account-id="${account.id}"
+                  data-account-name="${account.name}"
+                  data-account-amount="${account.amount}"
+                  data-account-color="${account.color}"
+                  onclick="editAccount(this)">Edit</button>
+          <form th:action="@{/bank-account/delete}" method="post" style="display:inline;">
+            <input type="hidden" name="accountIdDelete" th:value="${account.id}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

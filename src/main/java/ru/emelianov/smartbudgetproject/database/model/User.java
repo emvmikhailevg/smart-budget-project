@@ -37,9 +37,9 @@ public class User implements UserDetails {
     private String email;
 
     /**
-     * Имя пользователя. Не должно быть пустым
+     * Имя пользователя. Должна быть уникальной и не пустой
      */
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotBlank
     private String username;
 

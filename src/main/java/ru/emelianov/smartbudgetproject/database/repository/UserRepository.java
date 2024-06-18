@@ -20,4 +20,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
      */
     Optional<User> findByUsername(String username);
 
+    /**
+     * Находит пользователя по электронной почте
+     *
+     * @param email электронная почта
+     * @return объект {@link Optional}, содержащий найденного пользователя, если он существует
+     */
+    Optional<User> findByEmail(String email);
+
 }

@@ -1,6 +1,7 @@
 package ru.emelianov.smartbudgetproject.database.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.emelianov.smartbudgetproject.database.model.Transaction;
 
@@ -31,6 +32,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
      * @param bankAccountId ID банковского счета
      * @return опционально самая ранняя дата транзакции
      */
+    @Query("SELECT MIN(t.date) FROM Transaction t WHERE t.bankAccount.id = :bankAccountId")
     Optional<LocalDateTime> findEarliestTransactionDate(Long bankAccountId);
 
     /**
@@ -39,6 +41,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
      * @param bankAccountId ID банковского счета
      * @return опционально самая поздняя дата транзакции
      */
+    @Query("SELECT MAX(t.date) FROM Transaction t WHERE t.bankAccount.id = :bankAccountId")
     Optional<LocalDateTime> findLatestTransactionDate(Long bankAccountId);
 
 }

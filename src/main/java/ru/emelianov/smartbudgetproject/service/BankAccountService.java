@@ -30,6 +30,14 @@ public interface BankAccountService {
     List<BankAccountDTO> findAllByUserId(Long userId);
 
     /**
+     * Находит банковский счет по идентификатору пользователя
+     *
+     * @param userId идентификатор пользователя
+     * @return DTO банковского счета
+     */
+    BankAccountDTO findByUserId(Long userId);
+
+    /**
      * Удаляет банковский счет по его идентификатору
      *
      * @param accountId идентификатор банковского счета
@@ -37,22 +45,14 @@ public interface BankAccountService {
     void delete(Long accountId);
 
     /**
-     * Проверяет, существует ли банковский счет с данным идентификатором у указанного пользователя
-     *
-     * @param accountId идентификатор банковского счета
-     * @param userId    идентификатор пользователя
-     * @return true, если счет существует, иначе false
-     */
-    boolean hasBankAccountWithId(Long accountId, Long userId);
-
-    /**
      * Редактирует банковский счет
      *
      * @param accountId идентификатор банковского счета
      * @param name      новое имя счета
+     * @param amount    новая сумма на счете
      * @param color     новый цвет счета в формате Hex
      */
-    void editBankAccount(Long accountId, String name, String color);
+    void editBankAccount(Long accountId, String name, BigDecimal amount, String color);
 
     /**
      * Переводит сумму с одного банковского счета на другой

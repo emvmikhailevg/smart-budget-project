@@ -10,6 +10,7 @@ import ru.emelianov.smartbudgetproject.dto.BankAccountDTO;
 import ru.emelianov.smartbudgetproject.exception.BankAccountDeletionException;
 import ru.emelianov.smartbudgetproject.exception.BankAccountNotFoundException;
 import ru.emelianov.smartbudgetproject.exception.InsufficientFundsException;
+import ru.emelianov.smartbudgetproject.exception.SameAccountTransferException;
 import ru.emelianov.smartbudgetproject.mapper.BankAccountMapper;
 import ru.emelianov.smartbudgetproject.service.BankAccountService;
 
@@ -48,6 +49,14 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
+    public BankAccountDTO findByUserId(Long userId) {
+        return bankAccountRepository.findByUserId(userId).stream()
+                .map(bankAccountMapper::convertToDTO)
+                .findFirst()
+                .orElseThrow(() -> new BankAccountNotFoundException(ACCOUNT_NOT_FOUND.getMessage()));
+    }
+
+    @Override
     public void delete(Long accountId) {
         try {
             bankAccountRepository.deleteById(accountId);
@@ -57,16 +66,12 @@ public class BankAccountServiceImpl implements BankAccountService {
     }
 
     @Override
-    public boolean hasBankAccountWithId(Long accountId, Long userId) {
-        return bankAccountRepository.findByIdAndUserId(accountId, userId).isPresent();
-    }
-
-    @Override
-    public void editBankAccount(Long accountId, String name, String color) {
+    public void editBankAccount(Long accountId, String name, BigDecimal amount, String color) {
         BankAccount bankAccount = bankAccountRepository.findById(accountId)
                 .orElseThrow(() -> new BankAccountNotFoundException(ACCOUNT_NOT_FOUND.getMessage()));
 
         bankAccount.setName(name);
+        bankAccount.setAmount(amount);
         bankAccount.setColor(color);
 
         bankAccountRepository.save(bankAccount);
@@ -74,6 +79,10 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public void transferAmountBetweenAccounts(Long fromAccountId, Long toAccountId, BigDecimal amount) {
+        if (fromAccountId.equals(toAccountId)) {
+            throw new SameAccountTransferException(SAME_ACCOUNT_TRANSFER_NOT_ALLOWED.getMessage());
+        }
+
         BankAccount fromAccount = bankAccountRepository.findById(fromAccountId)
                 .orElseThrow(() -> new BankAccountNotFoundException(SOURCE_ACCOUNT_NOT_FOUND.getMessage()));
 

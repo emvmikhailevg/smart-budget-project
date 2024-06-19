@@ -43,7 +43,6 @@ public class BankAccount {
      * Сумма банковского счета
      */
     @Column(nullable = false)
-    @Setter(AccessLevel.NONE)
     private BigDecimal amount = BigDecimal.ZERO;
 
     /**
